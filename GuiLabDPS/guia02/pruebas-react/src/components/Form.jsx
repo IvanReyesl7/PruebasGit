@@ -1,43 +1,31 @@
 import React,{useState} from 'react';
 import Todo from "./todo"
 
+const products = [
+  {
+    id: 1,
+    name: 'Product 1',
+    description: 'Description for Product 1',
+    price: 19.99,
+    image: './1.jpg',
+  },
+  {
+    id: 2,
+    name: 'Product 2',
+    description: 'Description for Product 1',
+    price: 19.99,
+    image: './1.jpg',
+  },
+  // Agrega más productos aquí
+];
+
 const Form = () => {
-
-    const [todo, setTodo] = useState({})
-    const [todos,setTodos] = useState([
-        {todo: 'todo 1'},
-        {todo: 'todo 2'},
-        {todo: 'todo 3'}
-    ])
-
-    const handleChange = e => setTodo({[e.target.name] : e.target.value})
-    const handleClick = e => {
-        if(Object.keys(todos).length === 0 || todo.todo.trim() === '') {
-            alert('el campo no puede estar vacio')
-            return
-        }
-        setTodos([...todos, todo])
-    }
-
-    const deleteTodo = indice => {
-        const newTodos = [...todos]
-        newTodos.splice(indice,1)
-        setTodos(newTodos)
-    }
-
-
-
-    return (
-        <>
-            <form onSubmit={e => e.preventDefault()}>
-                <label>Agregar Tarea</label><br/>
-                <input type="text" name="todo" onChange={handleChange}/>
-                <button onClick={handleClick}>Agregar</button>
-            </form>
-            {
-                todos.map((value, index) => (<Todo todo={value.todo}/>))
-            }
-        </>
-    )
-   }
+  return (
+    <div className="product-list">
+      {products.map(product => (
+        <Todo key={product.id} product={product} />
+      ))}
+    </div>
+  );
+};
    export default Form
