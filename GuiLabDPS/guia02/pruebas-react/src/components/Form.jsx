@@ -1,31 +1,61 @@
 import React,{useState} from 'react';
 import Todo from "./todo"
 
-const products = [
-  {
-    id: 1,
-    name: 'Product 1',
-    description: 'Description for Product 1',
-    price: 19.99,
-    image: './1.jpg',
-  },
-  {
-    id: 2,
-    name: 'Product 2',
-    description: 'Description for Product 1',
-    price: 19.99,
-    image: './1.jpg',
-  },
-  // Agrega más productos aquí
-];
-
 const Form = () => {
-  return (
-    <div className="product-list">
-      {products.map(product => (
-        <Todo key={product.id} product={product} />
-      ))}
-    </div>
-  );
+  const [todo,setTodo] = useState({});
+  const [todos,setTodos] = useState([
+    {
+      nombre:"Juan Carlos",
+      apellido:"Marroquin",
+      numero:"78874994",
+      
+  },
+  {
+      "nombre": "Edwin Ivan",
+      "apellido": "Reyes Figueroa",
+      "numero": "22886545",
+     
+  },
+  {
+      "nombre": "Josue Eduardo",
+      "apellido": "Fuentes",
+      "numero": "45568734",
+      
+  }
+  ])
+
+  const handleChange = e => setTodo({[e.target.name]: e.target.value})
+  const handleClick = e => {
+    if(Object.keys(todo).length === 0){
+      alert("espacios en blanco no");
+      return
+    }
+    setTodos([...todos,todo])
+  }
+
+  const deleteTodo = (indice) =>{
+    const newTodos = [...todos]
+    newTodos.splice(indice,1)
+    setTodos(newTodos)
+  }
+
+  return(
+    <>
+      <form onSubmit={e=>e.preventDefault()}>
+        <label>Agregar tarea</label><br />
+        <input type="text" name='nombre' onChange={handleChange} />
+        <input type="text" name='apellido' onChange={handleChange} />
+        <input type="text" name='numero' onChange={handleChange} />
+        <button onClick={handleClick}>Agregar</button>
+      </form>
+      {
+        todos.map((value,index)=>(
+          <Todo nombre={value.nombre} apellido={value.apellido} numero={value.numero}></Todo>
+        ))
+      }
+    </>
+  )
+    
 };
-   export default Form
+
+export default Form

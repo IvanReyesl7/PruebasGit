@@ -1,14 +1,16 @@
 import React from "react"
 
-const Product = ({ product }) => {
+const Todo = ({ nombre,apellido,numero,index,deleteTodo }) => {
     return (
-      <div className="product">
-        <img src={product.image} alt={product.name} />
-        <h3>{product.name}</h3>
-        <p>{product.description}</p>
-        <p>${product.price.toFixed(2)}</p>
+      <>
+      <div className="list">
+        <h3>{nombre}</h3>
+        <h3>{apellido}</h3>
+        <h3>{numero}</h3>
+        <button className="btn-delete" onClick={()=> deleteTodo(index)}>x</button>
       </div>
+      </>
     );
   };
   
-  export default Product;
+  export default Todo;
